@@ -1,0 +1,154 @@
+* {
+    top: 0%;
+    left: 0%;
+    margin: 0%;
+    padding: 0%;
+}
+
+a {
+    color: #333;
+}
+
+a:hover {
+    color: #007cb7;
+}
+
+body {
+    width: 100vw;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+
+/* form {
+    width: 90%;
+    max-width: 100%;
+} */
+
+
+/* .bank-logo {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+    margin-left: 0;
+    padding: 0;
+    width: 100%;
+    height: 33vh;
+    border-radius: 0;
+    -moz-background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    background-image: url(../img/bank-logo.png);
+    background-clip: padding-box;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-align: center;
+} */
+
+.bank-logo {
+    background-color: #007cb7;
+    margin-bottom: .5rem;
+    padding: 1.3rem 2rem;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.container .form-group {
+    position: relative;
+    text-align: center;
+    margin: 0 auto 8px auto !important;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.container .form-group small {
+    display: none;
+    color: #595959;
+    position: absolute;
+    right: 2px;
+    -moz-transform: translateY(-18px);
+    -ms-transform: translateY(-18px);
+    -webkit-transform: translateY(-18px);
+    transform: translateY(-18px);
+    transition: ease all 10s !important;
+}
+
+.container .form-group input:valid+small {
+    font-size: 12px;
+    margin-top: 20px;
+    display: block;
+}
+
+.container .form-group input {
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #333;
+    padding: 10px 15px;
+    margin: 0;
+    outline: 0ch;
+    border: 1px solid #007cb7;
+    border-radius: 2px;
+}
+
+.container .form-group input:valid {
+    padding: 10px 15px 0;
+    height: 40px !important;
+    border: 1px solid #007cb7;
+}
+
+.container .form-group input:invalid {
+    border: 1px solid red;
+}
+
+button {
+    width: 330px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00000062 !important;
+    background-color: #007cb7;
+    padding: 16px;
+    border: none;
+    user-select: none;
+    cursor: not-allowed !important;
+}
+
+button:valid {
+    cursor: pointer !important;
+    color: #fff !important;
+}
+
+#account p {
+    font-size: 13px;
+}
+
+li {
+    list-style-type: none;
+    padding: 3px 0;
+    margin: 0 0 5px;
+    border-bottom: 1px solid #fff;
+}
+
+li label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: .9rem;
+    line-height: 2rem;
+    font-weight: 600;
+}
