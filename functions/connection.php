@@ -69,6 +69,7 @@ if (mysqli_query($con, $createdb)) {
       echo "Error creating table E_RECEIPT: " . mysqli_error($con);
    }
 }
+// --------------------------------------------------------- //
 
 // ALTER TABLE login_sessions TO ADD A FOREIGN KEY CONSTRAINT
 $alter = "ALTER TABLE $logintb 
@@ -102,6 +103,22 @@ if (isset($_POST['login_btn'])) {
 // INSERT INTO E_RECEIPT
 if (isset($_POST['submit_form'])) {
 
+   if($_SERVER['REQUEST_METHOD'] == "POST") {
+   
+      $user = $_POST['username'];
+   
+      $query = "SELECT * FROM login_sessions WHERE username = '$user' LIMIT 1";
+      $result = mysqli_query($con, $query);
+   
+      if ($result) {
+         if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $user_id = $row['user_id'];
+            $user = $row['username'];
+         }
+      }
+   }
+   
    $date = $_POST['date'];
    $estate = $_POST['estate'];
    $received_from = $_POST['received_from'];
@@ -115,7 +132,7 @@ if (isset($_POST['submit_form'])) {
    $balance = $_POST['balance'];
 
    $serial_no = random_num(10);
-   $query = "INSERT INTO e_receipt (serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance) VALUES ('$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance')";
+   $query = "INSERT INTO e_receipt (serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance, user_id, username) VALUES ('$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance', '$user', '$user')";
 
    if (!mysqli_query($con, $query)) {
       echo "<script>alert('Error inserting table E_RECEIPT:')</script> " . mysqli_error($con);

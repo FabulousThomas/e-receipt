@@ -85,10 +85,9 @@ $user_data = check_login($con);
                                  <td>Dates</td>
                                  <td>Customers</td>
                                  <td>Amounts</td>
-                                 <!-- <td>Print</td> -->
+                                 <!-- <td>Users</td> -->
                                  <td>Edit</td>
                                  <td>Delete</td>
-                                 <!-- <td>Share</td> -->
                                  <td>View</td>
                               </tr>
                            </thead>
@@ -104,6 +103,7 @@ $user_data = check_login($con);
                                  <td class="name"><?php echo $res['date'] ?></td>
                                  <td class="name"><?php echo $res['received_from'] ?></td>
                                  <td class="name">NGN <?php echo $res['amount_paid'] ?></td>
+                                 <!-- <td class="name"><?php echo $res['username'] ?></td> -->
                                  <td><a href="./update.php?id=<?php echo $res['receipt_id'] ?>"><span
                                           class="las la-edit" id="las"></span></a></td>
                                  <td>
