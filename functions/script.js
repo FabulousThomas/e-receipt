@@ -36,25 +36,25 @@ function init() {
 init();
 
 // Search bar function
-const searchInput = document.getElementById('search-input');
-const namesFromDom = document.getElementsByClassName('name');
+// const searchInput = document.getElementById('search-input');
+// const namesFromDom = document.getElementsByClassName('name');
 
-searchInput.addEventListener('input', (event) => {
-    const { value } = event.target;
+// searchInput.addEventListener('input', (event) => {
+//     const { value } = event.target;
 
-    const searchQuery = value.toLowerCase();
+//     const searchQuery = value.toLowerCase();
 
-    for (const nameElement of namesFromDom) {
-        let name = nameElement.textContent.toLowerCase();
+//     for (const nameElement of namesFromDom) {
+//         let name = nameElement.textContent.toLowerCase();
 
-        if (name.includes(searchQuery)) {
-            nameElement.style.color = "red";
-        } else {
-            nameElement.style.color = "yellow";
-        }
-    }
+//         if (name.includes(searchQuery)) {
+//             nameElement.style.color = "red";
+//         } else {
+//             nameElement.style.color = "yellow";
+//         }
+//     }
 
-    console.log("Hello Search input");
+//     console.log("Hello Search input");
 
 
-});
+// });

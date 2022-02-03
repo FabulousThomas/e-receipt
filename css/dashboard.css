@@ -455,6 +455,10 @@ td {
     .recent-grid {
         grid-template-columns: 100%;
     }
+    #letter-head,
+    #letter-footer {
+        width: 30%;
+    }
 }
 
 @media only screen and (max-width: 768px) {

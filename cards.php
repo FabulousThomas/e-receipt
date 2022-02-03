@@ -1,17 +1,4 @@
-<?php
-   $query = "SELECT SUM(amount_paid) AS total FROM e_receipt";
-   $total = mysqli_query($con, $query);
 
-   $query = "SELECT SUM(outstanding) AS total_out FROM e_receipt";
-   $outstanding = mysqli_query($con, $query);
-
-   $query = "SELECT count(receipt_id) AS counts FROM e_receipt";
-   $count = mysqli_query($con, $query);
-
-   $query = "SELECT count(user_id) AS counts FROM users";
-   $users = mysqli_query($con, $query);
-
-?>
 
 <div class="cards">
             <div class="card-single">

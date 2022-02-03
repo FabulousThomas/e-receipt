@@ -52,7 +52,7 @@ $user_data = check_login($con);
                      <div id="letter-head" style="margin-bottom: 1.5rem;">
                         <img src="./img/letter-head.PNG">
                      </div>
-                     <div class="receipt-content" style="text-align: left !important;">
+                     <div class="receipt-content">
 
                         <form action="" method="POST" id="form" name="form" enctype="multipart/form-data">
 

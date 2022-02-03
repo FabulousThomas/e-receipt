@@ -46,7 +46,9 @@ if (mysqli_query($con, $createdb)) {
       `date` TIMESTAMP NOT NULL , 
       PRIMARY KEY (`id`)) ENGINE = InnoDB";
 
-   mysqli_query($con, $createtb);
+if (!mysqli_query($con, $createtb)) {
+   echo "Error creating table LOGIN_SESSIONS: " . mysqli_error($con);
+}
 
    // CREATE TABLE E_RECEIPT
    $createtb = "CREATE TABLE IF NOT EXISTS `e_receipt` (
@@ -72,53 +74,14 @@ if (mysqli_query($con, $createdb)) {
 // --------------------------------------------------------- //
 
 // ALTER TABLE login_sessions TO ADD A FOREIGN KEY CONSTRAINT
-$alter = "ALTER TABLE $logintb 
-ADD FOREIGN KEY (id) REFERENCES users(id)";
-mysqli_query($con, $alter);
+// $alter = "ALTER TABLE $logintb 
+// ADD FOREIGN KEY (id) REFERENCES users(id)";
+// mysqli_query($con, $alter);
 
-if (isset($_POST['login_btn'])) {
-   // INSERT INTO TABLE
-   $user_id = "";
-   $username = $_POST['username'];
-
-   $query = "SELECT user_id FROM users WHERE username = '$username' LIMIT 1";
-   $result = mysqli_query($con, $query);
-
-   if ($result) {
-      if ($result && mysqli_num_rows($result) > 0) {
-         $row = mysqli_fetch_assoc($result);
-         $user_id = $row['user_id'];
-      }
-   }
-
-   $insert = "INSERT INTO login_sessions (username, user_id) VALUES ('$username', '$user_id')";
-   mysqli_query($con, $insert);
-
-   // GET CURRENT DATE AND TIME
-   $date = date('Y-m-d H:i:s');
-   $update = "UPDATE $logintb SET date = '$date' WHERE username = '$username'";
-   mysqli_query($con, $update);
-}
 
 // INSERT INTO E_RECEIPT
 if (isset($_POST['submit_form'])) {
 
-   if($_SERVER['REQUEST_METHOD'] == "POST") {
-   
-      $user = $_POST['username'];
-   
-      $query = "SELECT * FROM login_sessions WHERE username = '$user' LIMIT 1";
-      $result = mysqli_query($con, $query);
-   
-      if ($result) {
-         if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $user_id = $row['user_id'];
-            $user = $row['username'];
-         }
-      }
-   }
-   
    $date = $_POST['date'];
    $estate = $_POST['estate'];
    $received_from = $_POST['received_from'];
@@ -132,17 +95,18 @@ if (isset($_POST['submit_form'])) {
    $balance = $_POST['balance'];
 
    $serial_no = random_num(10);
-   $query = "INSERT INTO e_receipt (serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance, user_id, username) VALUES ('$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance', '$user', '$user')";
+   $query = "INSERT INTO e_receipt (serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance, user_id, username) VALUES ('$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance')";
 
    if (!mysqli_query($con, $query)) {
-      echo "<script>alert('Error inserting table E_RECEIPT:')</script> " . mysqli_error($con);
+      echo "Error inserting table E_RECEIPT:) " . mysqli_error($con);
    } else {
       header("Location: ./dashbord.php");
    }
 }
 
-// JOIN USERS TABLE COLUMN(USER_ID) TO LOGIN_SESSIONS TABLE
-// $query = "SELECT username FROM login_sessions"
+
+$query = "SELECT * FROM e_receipt LIMIT 6";
+$result_limit = mysqli_query($con, $query);
 
 $query = "SELECT * FROM e_receipt";
 $result = mysqli_query($con, $query);
@@ -182,7 +146,6 @@ if (isset($_REQUEST['delete_btn'])) {
 
    $query = "DELETE FROM e_receipt WHERE receipt_id = '$id' LIMIT 1";
    if (mysqli_query($con, $query)) {
-      echo "<script>alert('Record Deleted successfully!')</script>";
       header("Location: ./dashbord.php");
    }
 }
@@ -216,3 +179,18 @@ function random_num($length)
    }
    return $text;
 }
+
+$query = "SELECT * FROM login_sessions ORDER BY id DESC LIMIT 15";
+$loginSession = mysqli_query($con, $query);
+
+$query = "SELECT SUM(amount_paid) AS total FROM e_receipt";
+$total = mysqli_query($con, $query);
+
+$query = "SELECT SUM(outstanding) AS total_out FROM e_receipt";
+$outstanding = mysqli_query($con, $query);
+
+$query = "SELECT count(receipt_id) AS counts FROM e_receipt";
+$count = mysqli_query($con, $query);
+
+$query = "SELECT count(user_id) AS counts FROM users";
+$users = mysqli_query($con, $query);

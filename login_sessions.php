@@ -5,9 +5,6 @@ session_start();
 include("./functions/connection.php");
 include("./functions/function.php");
 
-$query = "SELECT id, user_id, username, date FROM login_sessions";
-$loginSession = mysqli_query($con, $query);
-
 $user_data = check_login($con);
 
 ?>

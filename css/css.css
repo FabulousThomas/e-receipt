@@ -56,11 +56,12 @@ body {
 } */
 
 .bank-logo {
-    background-color: #007cb7;
+    /* background-color: #007cb7; */
+    background-color: #fff;
     margin-bottom: .5rem;
     padding: 1.3rem 2rem;
     text-align: center;
-    color: #fff;
+    color: #000;
     letter-spacing: 1px;
 }
 

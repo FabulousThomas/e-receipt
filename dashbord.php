@@ -93,7 +93,7 @@ $user_data = check_login($con);
                            </thead>
                            <tbody>
 
-                              <?php foreach ($result as $res) { ?>
+                              <?php foreach ($result_limit as $res) { ?>
                               <form action="" method="POST" enctype="multipart/form-data">
                                  <input type="text" hidden id="id" value="<?php echo $res['receipt_id']; ?>">
                               </form>

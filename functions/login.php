@@ -4,7 +4,7 @@ $loginErr = "";
 
 if (isset($_POST['login_btn'])) {
 
-
+    $user_id = "";
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -16,12 +16,21 @@ if (isset($_POST['login_btn'])) {
 
         if ($result) {
             if ($result && mysqli_num_rows($result) > 0) {
-                $user_data = mysqli_fetch_assoc($result);
+                $row = mysqli_fetch_assoc($result);
+                $user_id = $row['user_id'];
 
-                if ($user_data['password'] === $password) {
-                    $_SESSION['id'] = $user_data['id'];
+                if ($row['username'] == $username && $row['password'] == $password) {
+                    $_SESSION['id'] = $row['id'];
                     $_SESSION['valid'] = true;
                     $_SESSION['timeout'] = time();
+
+                    $insert = "INSERT INTO login_sessions (username, user_id) VALUES ('$username', '$user_id')";
+                    mysqli_query($con, $insert);
+
+                    // GET CURRENT DATE AND TIME
+                    $date = date('Y-m-d H:i:s');
+                    $update = "UPDATE $logintb SET date = '$date' WHERE username = '$username'";
+                    mysqli_query($con, $update);
                     header("Location: ./dashbord.php");
                     die;
                 }
@@ -33,5 +42,4 @@ if (isset($_POST['login_btn'])) {
         // echo "Please, enter some valid informations (><)";
         $loginErr = "Please, enter some valid informations (><)";
     }
-
 }

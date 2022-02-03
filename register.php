@@ -23,6 +23,7 @@ require_once "./functions/reg.php";
 
         <form action="" method="post" class="form" id="form" enctype="multipart/form-data">
             <div class="bank-logo">
+            <img src="./img/viewdeep-logo.png" width="130px" height="130px">
                 <h5>VIEWDEEP E-RECEIPT GENERATOR</h5>
             </div>
             <div class="form-group">
