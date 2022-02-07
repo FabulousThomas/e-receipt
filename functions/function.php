@@ -19,4 +19,17 @@ function check_login($con)
    die;
 }
 
+if (isset($_REQUEST['search-sessions'])) {
+   $term = $_REQUEST['search-sessions'];
+   $term = preg_replace("#[^0-9a-z]#i", "", $term);
+
+   if (!empty($term)) {
+      $query = "SELECT * FROM login_sessions WHERE user_id LIKE '%$term%' OR username LIKE '%$term%' OR date LIKE '%$term%' ORDER BY id DESC";
+      $session = mysqli_query($con, $query);
+   } else {
+      echo "<script>alert('Type something to search!')</script>";
+   }
+   $searchErr = 'Your search result!';
+}
+
 

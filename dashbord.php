@@ -4,6 +4,7 @@ session_start();
 
 require_once "./functions/connection.php";
 require_once "./functions/function.php";
+include "./functions/timeout.php";
 
 $user_data = check_login($con);
 
@@ -21,8 +22,9 @@ $user_data = check_login($con);
 
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+      <link rel="shortcut icon" href="./img/viewdeep-logo.png" type="image/x-icon">
    <link rel="stylesheet" href="css/dashboard.css" />
-   <title>ViewDeep E-Receipt Admin</title>
+   <title>ViewDeep E-Receipt | Dashboard</title>
 </head>
 
 <body>
@@ -34,12 +36,6 @@ $user_data = check_login($con);
       </div>
       <div class="sidebar-menu">
          <ul>
-            <form method="POST">
-               <div class="search-wrapper search-mobile">
-                  <span class="las la-search"></span>
-                  <input type="text" id="search-input" name="search-input" placeholder="Search here...">
-               </div>
-            </form>
             <li>
                <a href="" class="active"><span class="las la-igloo"></span>
                   <span>Dashboard</span></a>
@@ -53,15 +49,36 @@ $user_data = check_login($con);
                   <span>Invoice</span></a>
             </li>
             <li>
-               <a href="./login_sessions.php"><span class="las la-clipboard"></span>
+               <a href="./sessions.php"><span class="las la-users"></span>
                   <span>Login Sessions</span></a>
             </li>
+            <li>
+               <a href="./sharing.php"><span class="las la-percentage"></span>
+                  <span>Sharing</span></a>
+            </li>
+           
          </ul>
       </div>
    </div>
 
    <div class="main-content">
-      <?php require_once "./header.php" ?>
+   <header>
+         <h2>
+            <label for="nav-toggle">
+               <span class="las la-bars"></span>
+            </label> <span class="name">ViewDeep</span>
+         </h2>
+         
+         <div class="user-wrapper">
+            <span class="las la-user"></span>
+            <div>
+               <h4><?php echo $user_data['username'] ?></h4>
+               <!-- <small>Admin</small> -->
+            </div>
+            <a href="./functions/logout.php"><span class="las la-power-off"
+                  style="color: red; border-color: red; margin-left: .5rem;"></span></a>
+         </div>
+      </header>
 
       <main>
          <?php require_once "./cards.php" ?>
@@ -113,15 +130,11 @@ $user_data = check_login($con);
                                              class="las la-trash" id="las"></span></button>
                                     </form>
                                  </td>
-                                 <td><a href="./preview.php?id=<?php echo $res['receipt_id'] ?>" target="blank"><span
+                                 <td><a href="./preview.php?id=<?php echo $res['receipt_id'] ?>" target="_blank"><span
                                           class="las la-clipboard-list" id="las"></span></a></td>
                               </tr>
                               <?php } ?>
                            </tbody>
-
-                           <?php if ($searchErr) { ?>
-                                 <td class="name"><?php echo $searchErr ?></td>
-                              <?php } ?>
 
                         </table>
                      </div>

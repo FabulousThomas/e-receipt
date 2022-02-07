@@ -28,9 +28,9 @@ if (isset($_POST['login_btn'])) {
                     mysqli_query($con, $insert);
 
                     // GET CURRENT DATE AND TIME
-                    $date = date('Y-m-d H:i:s');
-                    $update = "UPDATE $logintb SET date = '$date' WHERE username = '$username'";
-                    mysqli_query($con, $update);
+                    // $date = date('Y-m-d H:i:s');
+                    // $update = "UPDATE $logintb SET date = '$date' WHERE username = '$username'";
+                    // mysqli_query($con, $update);
                     header("Location: ./dashbord.php");
                     die;
                 }

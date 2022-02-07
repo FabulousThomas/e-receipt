@@ -3,8 +3,8 @@
 <div class="cards">
             <div class="card-single">
                <div>
-               <?php foreach($count as $co) { ?> 
-                     <h1><?php echo $co['counts'] ?></h1>
+               <?php foreach($invoice as $co) { ?> 
+                     <h1><?php echo $co['invoice'] ?></h1>
                      <?php } ?>
                   <span>Customers</span>
                </div>
@@ -15,8 +15,8 @@
 
             <div class="card-single">
                <div>
-               <?php foreach($count as $co) { ?> 
-                     <h1><?php echo $co['counts'] ?></h1>
+               <?php foreach($invoice as $in) { ?> 
+                     <h1><?php echo $in['invoice'] ?></h1>
                      <?php } ?>
                   <span>Invoice</span>
                </div>

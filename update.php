@@ -4,6 +4,7 @@ session_start();
 
 require_once "./functions/connection.php";
 require_once "./functions/function.php";
+include "./functions/timeout.php";
 
 $user_data = check_login($con);
 
@@ -19,6 +20,7 @@ $user_data = check_login($con);
 
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+      <link rel="shortcut icon" href="./img/viewdeep-logo.png" type="image/x-icon">
    <link rel="stylesheet" href="css/dashboard.css" />
    <title>ViewDeep E-Receipt | Update</title>
 </head>
@@ -45,9 +47,14 @@ $user_data = check_login($con);
                   <span>Invoice</span></a>
             </li>
             <li>
-               <a href="./login_sessions.php"><span class="las la-clipboard"></span>
+               <a href="./sessions.php"><span class="las la-users"></span>
                   <span>Login Sessions</span></a>
             </li>
+            <li>
+               <a href="./sharing.php"><span class="las la-percentage"></span>
+                  <span>Sharing</span></a>
+            </li>
+           
          </ul>
       </div>
    </div>
@@ -181,14 +188,14 @@ $user_data = check_login($con);
                            <label for="amount_paid">Amount paid</label>
                            <input type="text" name="amount_paid" class="form-control" id="amount_paid"
                               value="<?php echo $res['amount_paid'] ?>" required
-                              onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57">
+                              onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57" onkeyup="getValue();">
                         </div>
 
                         <div class="form-group">
                            <label for="outstanding">Total Outstanding</label>
-                           <input type="text" name="outstanding" class="form-control" id="outstanding"
+                           <input type="text" name="outstanding" class="form-control" id="total_outstanding"
                               value="<?php echo $res['outstanding'] ?>"
-                              onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57">
+                              onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57" onkeyup="getValue();">
                         </div>
 
                         <div class="form-group">

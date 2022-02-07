@@ -4,6 +4,7 @@ session_start();
 
 require_once "./functions/connection.php";
 require_once "./functions/function.php";
+include "./functions/timeout.php";
 
 $user_data = check_login($con);
 
@@ -19,8 +20,9 @@ $user_data = check_login($con);
 
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+      <link rel="shortcut icon" href="./img/viewdeep-logo.png" type="image/x-icon">
    <link rel="stylesheet" href="css/dashboard.css" />
-   <title>ViewDeep E-Receipt Admin</title>
+   <title>ViewDeep E-Receipt | Add Records</title>
 </head>
 
 <body>
@@ -45,9 +47,14 @@ $user_data = check_login($con);
                   <span>Invoice</span></a>
             </li>
             <li>
-               <a href="./login_sessions.php"><span class="las la-clipboard"></span>
+               <a href="./sessions.php"><span class="las la-users"></span>
                   <span>Login Sessions</span></a>
             </li>
+            <li>
+               <a href="./sharing.php"><span class="las la-percentage"></span>
+                  <span>Sharing</span></a>
+            </li>
+           
          </ul>
       </div>
    </div>
@@ -131,42 +138,46 @@ $user_data = check_login($con);
 
                         <div class="form-group">
                            <label for="payment_figure">Payment in figure</label>
-                           <input type="text" name="payment_figure" class="form-control" id="figure" required onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57">
+                           <input type="text" name="payment_figure" class="form-control" id="figure" required
+                              onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57">
                         </div>
 
                         <div class="form-group">
                            <label for="drop-down">Number of unit(s)</label>
                            <?php
 
-                              $options = array('Select option', 'half plot', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20');
-                              $selected = $options[0];
+                           $options = array('Select option', 'half plot', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20');
+                           $selected = $options[0];
 
-                              echo "<select name='no_unit'>";
-                              foreach ($options as $option) {
+                           echo "<select name='no_unit'>";
+                           foreach ($options as $option) {
 
-                                 if ($selected === $option) {
-                                    echo "<option select='selected' value='$option'>$option</option>";
-                                 } else {
-                                    echo "<option value='$option'>$option</option>";
-                                 }
+                              if ($selected === $option) {
+                                 echo "<option select='selected' value='$option'>$option</option>";
+                              } else {
+                                 echo "<option value='$option'>$option</option>";
                               }
-                              echo "</select>";
-                              ?>
+                           }
+                           echo "</select>";
+                           ?>
                         </div>
 
                         <div class="form-group">
                            <label for="amount_paid">Amount paid</label>
-                           <input type="text" name="amount_paid" class="form-control" id="amount_paid" required onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57">
+                           <input type="text" name="amount_paid" class="form-control" id="amount_paid" required
+                              onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57" onkeyup="getValue();">
                         </div>
 
                         <div class="form-group">
                            <label for="total_outstanding">Total Outstanding</label>
-                           <input type="text" name="total_outstanding" class="form-control" id="outstanding" onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57">
+                           <input type="text" name="total_outstanding" class="form-control" id="outstanding"
+                              onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57" onkeyup="getValue();">
                         </div>
 
                         <div class="form-group">
                            <label for="balance">Balance as today</label>
-                           <input type="text" name="balance" class="form-control" id="balance" readonly>
+                           <input type="text" name="balance" class="form-control" id="balance"
+                              placeholder="Auto calculated" readonly>
                         </div>
 
                         <div class="form-group">

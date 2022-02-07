@@ -303,14 +303,6 @@ td {
 
 /* E-RECEIPT FORM */
 
-
-/* .recent-grid #form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
-
 .recent-grid #form:first-child .group {
     display: flex;
 }
@@ -331,15 +323,6 @@ td {
     font-size: 1.2rem;
 }
 
-.container.receipt-container .form-group .form-control,
-.container.receipt-container .form-group select {
-    padding: 5px;
-    border: none !important;
-    margin-left: 1rem;
-    outline: 0ch;
-    font-size: 1.2rem;
-}
-
 .recent-grid .form-group {
     margin-bottom: 1rem;
 }
@@ -352,71 +335,6 @@ td {
     border: #007cb7 1px solid;
     border-radius: 5px;
     color: #fff;
-}
-
-.recent-grid .projects .card .card-body .container {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-
-/* Print-share */
-
-.share-print {
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 5rem 0 0 0;
-}
-
-.share-print #printpdf {
-    cursor: pointer;
-    background-color: #007cb7;
-    padding: 6px 16px;
-    color: #ffff;
-    border: #007cb7 1px solid;
-    border-radius: 20px;
-    font-size: 1rem;
-}
-
-.share-print a i {
-    font-size: 2rem;
-}
-
-.share-print a {
-    margin: 12px 0;
-    transition: 500ms;
-}
-
-.share-print a:hover {
-    transform: scale(1.2);
-}
-
-.share-print .la-facebook {
-    color: #3b5998;
-}
-
-.share-print .la-twitter {
-    color: #1da1f2;
-}
-
-.share-print .la-linkedin-in {
-    color: #0077b5;
-}
-
-.share-print .la-pinterest {
-    color: #bd091c;
-}
-
-.share-print .la-whatsapp {
-    color: #25d366;
 }
 
 
@@ -454,10 +372,6 @@ td {
     }
     .recent-grid {
         grid-template-columns: 100%;
-    }
-    #letter-head,
-    #letter-footer {
-        width: 30%;
     }
 }
 

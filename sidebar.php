@@ -27,7 +27,7 @@
                   <span>Users</span></a>
             </li>
             <li>
-               <a href="./login_sessions.php"><span class="las la-clipboard"></span>
+               <a href="./sessions.php"><span class="las la-clipboard"></span>
                   <span>Login Sessions</span></a>
             </li>
          </ul>

@@ -4,6 +4,7 @@ session_start();
 
 require_once "./functions/connection.php";
 require_once "./functions/function.php";
+include "./functions/timeout.php";
 
 $user_data = check_login($con);
 
@@ -22,7 +23,8 @@ $user_data = check_login($con);
    <link rel="stylesheet"
       href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
    <link rel="stylesheet" href="css/dashboard.css" />
-   <title>ViewDeep E-Receipt Admin</title>
+   <link rel="shortcut icon" href="./img/viewdeep-logo.png" type="image/x-icon">
+   <title>ViewDeep E-Receipt | Invoice</title>
 </head>
 
 <body>
@@ -34,12 +36,12 @@ $user_data = check_login($con);
       </div>
       <div class="sidebar-menu">
          <ul>
-         <form method="POST">
-         <div class="search-wrapper search-mobile">
-            <span class="las la-search"></span>
-            <input type="text" id="search-input" name="search-input" placeholder="Search here...">
-         </div>
-         </form>
+            <form method="POST">
+               <div class="search-wrapper search-mobile">
+                  <span class="las la-search"></span>
+                  <input type="text" id="search-input" name="search-input" placeholder="Search here...">
+               </div>
+            </form>
             <li>
                <a href="./dashbord.php"><span class="las la-igloo"></span>
                   <span>Dashboard</span></a>
@@ -53,9 +55,14 @@ $user_data = check_login($con);
                   <span>Invoice</span></a>
             </li>
             <li>
-               <a href="./login_sessions.php"><span class="las la-clipboard"></span>
+               <a href="./sessions.php"><span class="las la-users"></span>
                   <span>Login Sessions</span></a>
             </li>
+            <li>
+               <a href="./sharing.php"><span class="las la-percentage"></span>
+                  <span>Sharing</span></a>
+            </li>
+            
          </ul>
       </div>
    </div>
@@ -64,7 +71,7 @@ $user_data = check_login($con);
       <?php require_once "./header.php" ?>
 
       <main>
-         
+
 
          <div class="recent-grid">
             <div class="projects">
@@ -100,23 +107,25 @@ $user_data = check_login($con);
                                  <td><?php echo $res['received_from'] ?></td>
                                  <td>NGN <?php echo $res['amount_paid'] ?></td>
                                  <!-- <td class="name"><?php echo $res['username'] ?></td> -->
-                                 <td><a href="./update.php?id=<?php echo $res['receipt_id'] ?>"><span class="las la-edit" id="las"></span></a></td>
+                                 <td><a href="./update.php?id=<?php echo $res['receipt_id'] ?>"><span
+                                          class="las la-edit" id="las"></span></a></td>
                                  <td>
                                     <form method="POST" enctype="multipart/form-data">
-                                    <input type="text" hidden name="id" value="<?php echo $res['receipt_id'];?>">
-                                    <button name="delete_btn" style="border: none; background: transparent;"><span class="las la-trash" id="las"></span></button>
+                                       <input type="text" hidden name="id" value="<?php echo $res['receipt_id']; ?>">
+                                       <button name="delete_btn" style="border: none; background: transparent;"><span
+                                             class="las la-trash" id="las"></span></button>
                                     </form>
                                  </td>
-                                 <td><a href="./preview.php?id=<?php echo $res['receipt_id'] ?>"><span
+                                 <td><a href="./preview.php?id=<?php echo $res['receipt_id'] ?>" target="_blank"><span
                                           class="las la-clipboard-list" id="las"></span></a></td>
                               </tr>
                               <?php } ?>
                            </tbody>
 
                            <?php if ($searchErr) { ?>
-                                 <td class="name"><?php echo $searchErr ?></td>
-                              <?php } ?>
-                              
+                           <td class="name"><?php echo $searchErr ?></td>
+                           <?php } ?>
+
                         </table>
                      </div>
                   </div>

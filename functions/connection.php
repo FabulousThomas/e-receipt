@@ -73,12 +73,6 @@ if (!mysqli_query($con, $createtb)) {
 }
 // --------------------------------------------------------- //
 
-// ALTER TABLE login_sessions TO ADD A FOREIGN KEY CONSTRAINT
-// $alter = "ALTER TABLE $logintb 
-// ADD FOREIGN KEY (id) REFERENCES users(id)";
-// mysqli_query($con, $alter);
-
-
 // INSERT INTO E_RECEIPT
 if (isset($_POST['submit_form'])) {
 
@@ -95,7 +89,7 @@ if (isset($_POST['submit_form'])) {
    $balance = $_POST['balance'];
 
    $serial_no = random_num(10);
-   $query = "INSERT INTO e_receipt (serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance, user_id, username) VALUES ('$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance')";
+   $query = "INSERT INTO e_receipt (serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance) VALUES ('$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance')";
 
    if (!mysqli_query($con, $query)) {
       echo "Error inserting table E_RECEIPT:) " . mysqli_error($con);
@@ -105,10 +99,10 @@ if (isset($_POST['submit_form'])) {
 }
 
 
-$query = "SELECT * FROM e_receipt LIMIT 6";
+$query = "SELECT * FROM e_receipt LIMIT 7";
 $result_limit = mysqli_query($con, $query);
 
-$query = "SELECT * FROM e_receipt";
+$query = "SELECT * FROM e_receipt ORDER BY receipt_id DESC";
 $result = mysqli_query($con, $query);
 
 if (isset($_REQUEST['id'])) {
@@ -160,10 +154,10 @@ if (isset($_POST['search-input'])) {
       $query = "SELECT * FROM e_receipt WHERE serial_no LIKE '%$term%' OR received_from LIKE '%$term%' OR amount_paid LIKE '%$term%'";
       $result = mysqli_query($con, $query);
    } else {
-      echo "<script>alert('Type a receipt serial number to search!')</script>";
+      echo "<script>alert('Type something to search!')</script>";
    }
    $searchErr = 'Your search result!';
-}
+} 
 
 // RANDOM NUMBER FUNCTION
 function random_num($length)
@@ -180,8 +174,13 @@ function random_num($length)
    return $text;
 }
 
-$query = "SELECT * FROM login_sessions ORDER BY id DESC LIMIT 15";
-$loginSession = mysqli_query($con, $query);
+$query = "SELECT * FROM login_sessions ORDER BY id DESC LIMIT 9";
+$session_limit = mysqli_query($con, $query);
+
+$query = "SELECT * FROM login_sessions ORDER BY id DESC";
+$session = mysqli_query($con, $query);
+
+
 
 $query = "SELECT SUM(amount_paid) AS total FROM e_receipt";
 $total = mysqli_query($con, $query);
@@ -189,8 +188,11 @@ $total = mysqli_query($con, $query);
 $query = "SELECT SUM(outstanding) AS total_out FROM e_receipt";
 $outstanding = mysqli_query($con, $query);
 
-$query = "SELECT count(receipt_id) AS counts FROM e_receipt";
-$count = mysqli_query($con, $query);
+$query = "SELECT  count(receipt_id) AS invoice FROM e_receipt";
+$invoice = mysqli_query($con, $query);
+
+// $query = "SELECT count(receipt_id) AS customer FROM e_receipt";
+// $customer = mysqli_query($con, $query);
 
 $query = "SELECT count(user_id) AS counts FROM users";
 $users = mysqli_query($con, $query);
