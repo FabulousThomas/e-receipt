@@ -6,7 +6,7 @@
 }
 
 body {
-    width: 100% !important;
+    /* width: 100% !important; */
     color: #333 !important;
     display: flex !important;
     flex-direction: column !important;
@@ -19,7 +19,7 @@ body {
 }
 
 .form {
-    margin: 0 auto 3rem !important;
+    /* margin: 0 auto 3rem !important; */
 }
 
 .bank-logo {

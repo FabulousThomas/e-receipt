@@ -52,7 +52,10 @@ $user_data = check_login($con);
                <a href="./invoice.php"><span class="las la-clipboard-list"></span>
                   <span>Invoice</span></a>
             </li>
-           
+            <li>
+               <a href="./profile.php"><span class="las la-user"></span>
+                  <span>Customer Profile</span></a>
+            </li>
             <li>
                <a href="" class="active"><span class="las la-users"></span>
                   <span>Login Sessions</span></a>

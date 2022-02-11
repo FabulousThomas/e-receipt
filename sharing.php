@@ -54,8 +54,12 @@ $user_data = check_login($con);
                   <span>New Receipt</span></a>
             </li>
             <li>
-               <a href=""><span class="las la-clipboard-list"></span>
+               <a href="./invoice.php"><span class="las la-clipboard-list"></span>
                   <span>Invoice</span></a>
+            </li>
+            <li>
+               <a href="./profile.php"><span class="las la-user"></span>
+                  <span>Customer Profile</span></a>
             </li>
             <li>
                <a href="./sessions.php"><span class="las la-users"></span>
@@ -69,7 +73,7 @@ $user_data = check_login($con);
          </ul>
       </div>
    </div>
-
+   
    <?php require_once "./header.php" ?>
 
    <div class="container">

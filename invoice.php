@@ -55,6 +55,10 @@ $user_data = check_login($con);
                   <span>Invoice</span></a>
             </li>
             <li>
+               <a href="./profile.php"><span class="las la-user"></span>
+                  <span>Customer Profile</span></a>
+            </li>
+            <li>
                <a href="./sessions.php"><span class="las la-users"></span>
                   <span>Login Sessions</span></a>
             </li>
