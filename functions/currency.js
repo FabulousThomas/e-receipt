@@ -8,7 +8,7 @@ onblur({ target: currencyInput })
 
 // bind event listeners
 currencyInput.addEventListener('focus', onFocus)
-currencyInput.addEventListener('keyup', onblur)
+currencyInput.addEventListener('blur', onblur)
 
 
 function localStringToNumber(s) {

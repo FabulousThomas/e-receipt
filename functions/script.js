@@ -9,12 +9,12 @@
 // });
 
 function getValue() {
-    var outstanding = document.form.total_outstanding.value;
+    var outstanding = document.form.total_outstanding.value.toLocaleString();
     var outstanding = +outstanding;
-    var amount = document.form.amount_paid.value;
+    var amount = document.form.amount_paid.value.toLocaleString();
     var amount = +amount;
-    var balance = amount - outstanding;
-    document.getElementById('balance').value = balance;
+    var balance = amount - outstanding.toLocaleString();
+    document.getElementById('balance').value = balance.toLocaleString();
 }
 
 // function printpdf() {
@@ -47,11 +47,7 @@ function init() {
 
 init();
 
-function sharePercentage() {
-
-    var amount = document.form.amount.value;
-
-    value = +amount;
+function sharePercentage(value) {
 
     dc = (17 * value) / 100;
     lo = (2 * value) / 100;
@@ -64,16 +60,16 @@ function sharePercentage() {
     gm = (4.5 * value) / 100;
     md = (11 * value) / 100;
 
-    document.getElementById('dircom').value = dc;
-    document.getElementById('level-one').value = lo;
-    document.getElementById('level-two').value = lt;
-    document.getElementById('business-invest').value = br;
-    document.getElementById('office-cost').value = oc;
-    document.getElementById('business-savings').value = bs;
-    document.getElementById('director-share').value = ds;
-    document.getElementById('ceo').value = ceo;
-    document.getElementById('gm').value = gm;
-    document.getElementById('md').value = md;
+    document.getElementById('dircom').value = dc.toLocaleString();
+    document.getElementById('level-one').value = lo.toLocaleString();
+    document.getElementById('level-two').value = lt.toLocaleString();
+    document.getElementById('business-invest').value = br.toLocaleString();
+    document.getElementById('office-cost').value = oc.toLocaleString();
+    document.getElementById('business-savings').value = bs.toLocaleString();
+    document.getElementById('director-share').value = ds.toLocaleString();
+    document.getElementById('ceo').value = ceo.toLocaleString();
+    document.getElementById('gm').value = gm.toLocaleString();
+    document.getElementById('md').value = md.toLocaleString();
 }
 
 // Search bar function

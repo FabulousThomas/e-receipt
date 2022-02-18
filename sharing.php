@@ -102,7 +102,7 @@ $user_data = check_login($con);
                </div>
 
                <div class="form-group">
-                  <input type="currency" name="amount" class="form-control" id="sales-input" placeholder="ENTER VALUE" spellcheck="false" required autocomplete="off"  onkeyup="sharePercentage();">
+                  <input type="currency" name="amount" class="form-control" id="sales-input" placeholder="ENTER VALUE" spellcheck="false" required autocomplete="off"  onkeyup="sharePercentage(this.value);" onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57">
                </div>
 
                <div class="form-group">

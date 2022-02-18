@@ -70,7 +70,7 @@ $user_data = check_login($con);
          <h2>
             <label for="nav-toggle">
                <span class="las la-bars"></span>
-            </label> <span class="name">ViewDeep</span>
+            </label> <span class="name">Dashboard</span>
          </h2>
          
          <div class="user-wrapper">

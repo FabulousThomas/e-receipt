@@ -198,7 +198,7 @@ $user_data = check_login($con);
    </div>
 
    <!-- JS -->
-   <!-- <script src="./functions/currency.js"></script> -->
+   <script src="./functions/currency.js"></script>
    <script src="./functions/script.js"></script>
 </body>
 
