@@ -168,20 +168,20 @@ $user_data = check_login($con);
 
                         <div class="form-group">
                            <label for="amount_paid">Amount paid</label>
-                           <input type="text" name="amount_paid" class="form-control" id="amount_paid" required
+                           <input type="currency" name="amount_paid" class="form-control" id="amount_paid" required
                               onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57" onkeyup="getValue();">
                         </div>
 
                         <div class="form-group">
                            <label for="total_outstanding">Total Outstanding</label>
-                           <input type="text" name="total_outstanding" class="form-control" id="outstanding"
+                           <input type="currency" name="total_outstanding" class="form-control" id="outstanding"
                               onkeypress="javascript: return event.charCode >= 48 && event.charCode <= 57" onkeyup="getValue();">
                         </div>
 
                         <div class="form-group">
                            <label for="balance">Balance as today</label>
-                           <input type="text" name="balance" class="form-control" id="balance"
-                              placeholder="Auto calculated" readonly>
+                           <input type="currency" name="balance" class="form-control" id="balance"
+                              placeholder="Auto calculated" onkeyup="getValue();">
                         </div>
 
                         <div class="form-group">
@@ -197,6 +197,8 @@ $user_data = check_login($con);
       </main>
    </div>
 
+   <!-- JS -->
+   <!-- <script src="./functions/currency.js"></script> -->
    <script src="./functions/script.js"></script>
 </body>
 

@@ -30,7 +30,7 @@ if (mysqli_query($con, $createdb)) {
       `user_id` INT NOT NULL , 
       `username` VARCHAR(225) NOT NULL , 
       `email` VARCHAR(225) NOT NULL , 
-      `password` VARCHAR(225) NOT NULL , 
+      `password` VARCHAR(225) NOT NULL ,  
       `date` TIMESTAMP NOT NULL , 
       PRIMARY KEY (`id`)) ENGINE = InnoDB";
 
@@ -46,13 +46,14 @@ if (mysqli_query($con, $createdb)) {
       `date` TIMESTAMP NOT NULL , 
       PRIMARY KEY (`id`)) ENGINE = InnoDB";
 
-if (!mysqli_query($con, $createtb)) {
-   echo "Error creating table LOGIN_SESSIONS: " . mysqli_error($con);
-}
+   if (!mysqli_query($con, $createtb)) {
+      echo "Error creating table LOGIN_SESSIONS: " . mysqli_error($con);
+   }
 
    // CREATE TABLE E_RECEIPT
    $createtb = "CREATE TABLE IF NOT EXISTS `e_receipt` (
-       `receipt_id` INT NOT NULL AUTO_INCREMENT , 
+       `id` INT NOT NULL AUTO_INCREMENT , 
+       `user_id` INT NOT NULL ,
        `serial_no` INT NOT NULL , 
        `date` DATE NOT NULL , 
        `estate` VARCHAR(50) NOT NULL , 
@@ -65,10 +66,32 @@ if (!mysqli_query($con, $createtb)) {
        `amount_paid` FLOAT NOT NULL , 
        `outstanding` FLOAT NOT NULL , 
        `balance` FLOAT NOT NULL , 
-       PRIMARY KEY (`receipt_id`)) ENGINE = InnoDB";
+       PRIMARY KEY (`id`)) ENGINE = InnoDB";
 
    if (!mysqli_query($con, $createtb)) {
       echo "Error creating table E_RECEIPT: " . mysqli_error($con);
+   }
+
+   // CREATE TABLE SHARING
+   $createtb = "CREATE TABLE IF NOT EXISTS `sharing` (
+         `id` INT NOT NULL AUTO_INCREMENT , 
+         `date` TIMESTAMP NOT NULL , 
+         `share_id` INT NOT NULL , 
+         `amount` INT NOT NULL , 
+         `direct_com` INT NOT NULL , 
+         `level_one` INT NOT NULL , 
+         `level_two` INT NOT NULL , 
+         `business_invest` INT NOT NULL , 
+         `office_cost` INT NOT NULL , 
+         `business_savings` INT NOT NULL , 
+         `director_share` INT NOT NULL , 
+         `ceo` INT NOT NULL , 
+         `general_man` INT NOT NULL , 
+         `managing_direct` INT NOT NULL , 
+         PRIMARY KEY (`id`)) ENGINE = InnoDB";
+
+   if (!mysqli_query($con, $createtb)) {
+      echo "Error creating table SHARING: " . mysqli_error($con);
    }
 }
 // --------------------------------------------------------- //
@@ -89,26 +112,65 @@ if (isset($_POST['submit_form'])) {
    $balance = $_POST['balance'];
 
    $serial_no = random_num(10);
-   $query = "INSERT INTO e_receipt (serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance) VALUES ('$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance')";
+   $user_id = random_num(10);
+   $query = "INSERT INTO e_receipt (user_id, serial_no, date, estate, received_from, sum_of, payment_mode, payment_for, payment_figure, no_unit, amount_paid, outstanding, balance) VALUES ('$user_id', '$serial_no', '$date', '$estate', '$received_from', '$sum_of', '$payment_mode', '$payment_for', '$payment_figure', '$no_unit', '$amount_paid', '$total_outstanding', '$balance')";
 
    if (!mysqli_query($con, $query)) {
       echo "Error inserting table E_RECEIPT:) " . mysqli_error($con);
    } else {
       header("Location: ./dashbord.php");
    }
+
+   $query = "SELECT * FROM e_receipt";
+   $result = mysqli_query($con, $query);
+
+   if ($result && mysqli_num_rows($result) > 0) {
+      $rows = mysqli_fetch_assoc($result);
+      $customer = $rows['received_from'];
+      $user_id = $rows['user_id'];
+
+      if($rows['received_from'] === $customer) {
+         $update = "UPDATE e_receipt SET user_id = '$user_id' WHERE received_from = '$customer'";
+         mysqli_query($con, $update);
+      }
+   }
 }
 
+// INSERT INTO SHARING
+if (isset($_POST['share-btn'])) {
+   $amount = $_POST['amount'];
+   $dircom = $_POST['dircom'];
+   $level_one = $_POST['level-one'];
+   $level_two = $_POST['level-two'];
+   $business_invest = $_POST['business-invest'];
+   $office_cost = $_POST['office-cost'];
+   $business_savings = $_POST['business-savings'];
+   $director_share = $_POST['director-share'];
+   $ceo = $_POST['ceo'];
+   $gm = $_POST['gm'];
+   $md = $_POST['md'];
+
+   $share_id = random_num(10);
+   $query = "INSERT INTO sharing (share_id, amount, direct_com, level_one, level_two, business_invest, office_cost, business_savings, director_share, ceo, general_man, managing_direct) VALUES ('$share_id', '$amount', '$dircom', '$level_one', '$level_two', '$business_invest', '$office_cost', '$business_savings', '$director_share', '$ceo', '$gm', '$md')";
+
+   if (mysqli_query($con, $query)) {
+      header("Location: ./sharing.php");
+   }
+}
+
+$query = "SELECT * FROM sharing ORDER BY id DESC";
+$share = mysqli_query($con, $query);
 
 $query = "SELECT * FROM e_receipt LIMIT 7";
 $result_limit = mysqli_query($con, $query);
 
-$query = "SELECT * FROM e_receipt ORDER BY receipt_id DESC";
+$query = "SELECT * FROM e_receipt ORDER BY id DESC";
 $result = mysqli_query($con, $query);
 
 if (isset($_REQUEST['id'])) {
    $id = $_REQUEST['id'];
 
-   $query = "SELECT * FROM e_receipt WHERE receipt_id = '$id' LIMIT 1";
+   $query = "SELECT * FROM e_receipt WHERE id = '$id' LIMIT 1";
    $result = mysqli_query($con, $query);
 }
 
@@ -157,7 +219,7 @@ if (isset($_POST['search-input'])) {
       echo "<script>alert('Type something to search!')</script>";
    }
    $searchErr = 'Your search result!';
-} 
+}
 
 // RANDOM NUMBER FUNCTION
 function random_num($length)
@@ -188,7 +250,7 @@ $total = mysqli_query($con, $query);
 $query = "SELECT SUM(outstanding) AS total_out FROM e_receipt";
 $outstanding = mysqli_query($con, $query);
 
-$query = "SELECT  count(receipt_id) AS invoice FROM e_receipt";
+$query = "SELECT  count(id) AS invoice FROM e_receipt";
 $invoice = mysqli_query($con, $query);
 
 // $query = "SELECT count(receipt_id) AS customer FROM e_receipt";

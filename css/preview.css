@@ -68,7 +68,7 @@ body .print-content {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 16.5rem 0 0 0;
+    margin: 5rem 0 0 0;
 }
 
 .share-print #printpdf {
@@ -115,5 +115,14 @@ body .print-content {
 @media screen and (max-width: 540px) {
     .container {
         padding: 0rem 1rem !important;
+    }
+}
+
+@media print {
+    body .share-print {
+        display: none;
+    }
+    body .print-content {
+        display: block;
     }
 }

@@ -47,8 +47,12 @@ function init() {
 
 init();
 
-function sharePercentage(value) {
-    var dc, lo, lt, br, oc, bs, ds, ceo, gm, md;
+function sharePercentage() {
+
+    var amount = document.form.amount.value;
+
+    value = +amount;
+
     dc = (17 * value) / 100;
     lo = (2 * value) / 100;
     lt = (1 * value) / 100;

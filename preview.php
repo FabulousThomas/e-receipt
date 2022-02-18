@@ -39,7 +39,7 @@ $user_data = check_login($con);
 
       <div class="form-container">
          <form method="POST" id="form" class="form" enctype="multipart/form-data">
-            <input type="text" id="id" value="<?php echo $res['receipt_id'] ?>" hidden>
+            <input type="text" id="id" value="<?php echo $res['id'] ?>" hidden>
             <div class="form-group group">
                <div>
                   <div class="form-group">
@@ -114,7 +114,7 @@ $user_data = check_login($con);
 
          </form>
          <p style="text-align: right; margin-top: 2rem; color: red; font-size: 1.2rem; ">Serial Number:
-            7785675
+            <?php echo $res['serial_no'] ?>
          </p>
       </div>
 
@@ -144,7 +144,7 @@ $user_data = check_login($con);
 
    <?php } ?>
 
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script src="./functions/script.js"></script>
 </body>
 

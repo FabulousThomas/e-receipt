@@ -5,8 +5,7 @@
     padding: 0%;
 }
 
-body {
-    /* width: 100% !important; */
+.container {
     color: #333 !important;
     display: flex !important;
     flex-direction: column !important;
@@ -15,19 +14,14 @@ body {
     min-height: 100vh !important;
     margin: auto !important;
     font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-    overflow-x: hidden !important;
-}
-
-.form {
-    /* margin: 0 auto 3rem !important; */
+    /* overflow-x: hidden !important; */
 }
 
 .bank-logo {
-    background-color: #fff;
-    padding: 1.3rem 2rem;
+    background-color: transparent;
+    padding: 0rem 2rem;
     text-align: center;
     letter-spacing: 1px;
-    margin: 3rem 0 0;
 }
 
 .form-group {
@@ -49,6 +43,7 @@ body {
     border: 1px solid #007cb7;
     border-radius: 2px;
     display: block;
+    background-color: transparent;
 }
 
 .form-group input:invalid {
@@ -65,4 +60,16 @@ body {
 .form-group label span {
     color: #007cb7;
     font-weight: 600;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px 15px;
+    color: #fff;
+    background-color: #007cb7;
+    border: 1px solid #007cb7;
+    outline: 0ch;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 1rem;
 }
